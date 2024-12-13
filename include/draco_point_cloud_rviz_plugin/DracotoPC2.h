@@ -13,7 +13,7 @@
 
 // point_cloud_transport
 #include <draco_point_cloud_transport/CompressedPointCloud2.h>
-#include <draco_point_cloud_transport/conversion_utilities.h>
+#include <draco_point_cloud_rviz_plugin/conversion_utilities.h>
 
 namespace draco_point_cloud_rviz_plugin
 {

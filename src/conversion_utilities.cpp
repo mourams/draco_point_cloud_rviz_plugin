@@ -1,6 +1,6 @@
 /* Taken from draco_point_cloud_transport by @paplhjak */
 
-#include "draco_point_cloud_transport/conversion_utilities.h"
+#include "draco_point_cloud_rviz_plugin/conversion_utilities.h"
 
 void assign_description_of_PointCloud2(sensor_msgs::PointCloud2& target, const draco_point_cloud_transport::CompressedPointCloud2& source)
 {

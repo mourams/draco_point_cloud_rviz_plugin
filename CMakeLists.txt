@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(draco_point_cloud_rviz_plugin)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
 find_package(catkin REQUIRED 
   COMPONENTS
   roscpp
@@ -15,7 +17,7 @@ find_package(Draco REQUIRED)
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME} ${draco_LIBRARY_DIR}
+  LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS rviz draco_point_cloud_transport sensor_msgs
 )
 
@@ -32,11 +34,8 @@ include_directories(
   ${CMAKE_BINARY_DIR}
   ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
-  ${draco_INCLUDE_DIR}/..
   ${draco_INCLUDE_DIR}
 )
-
-link_directories(${draco_LIBRARY_DIR})
 
 set(HEADER_FILES
     include/${PROJECT_NAME}/compressed_cloud_display.h
@@ -44,28 +43,6 @@ set(HEADER_FILES
     include/${PROJECT_NAME}/point_cloud_common.h
     include/${PROJECT_NAME}/point_cloud.h
     include/${PROJECT_NAME}/conversion_utilities.h
-
-    #Draco
-    lib/draco/src/draco/point_cloud/point_cloud.h
-    lib/draco/src/draco/core/decoder_buffer.h
-    lib/draco/src/draco/core/data_buffer.h
-    lib/draco/src/draco/core/options.h
-    lib/draco/src/draco/core/draco_types.h
-    lib/draco/src/draco/core/quantization_utils.h
-    lib/draco/src/draco/attributes/attribute_quantization_transform.h
-    lib/draco/src/draco/attributes/geometry_attribute.h
-    lib/draco/src/draco/attributes/point_attribute.h
-    lib/draco/src/draco/attributes/attribute_transform.h
-    lib/draco/src/draco/compression/decode.h
-    lib/draco/src/draco/compression/attributes/kd_tree_attributes_decoder.h
-    lib/draco/src/draco/compression/attributes/attributes_decoder.h
-    lib/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_decoder.h
-    lib/draco/src/draco/compression/point_cloud/point_cloud_decoder.h
-    lib/draco/src/draco/compression/point_cloud/point_cloud_sequential_decoder.h
-    lib/draco/src/draco/compression/bit_coders/rans_bit_decoder.h
-    lib/draco/src/draco/compression/bit_coders/direct_bit_decoder.h
-    lib/draco/src/draco/metadata/metadata.h
-    lib/draco/src/draco/metadata/metadata_decoder.h
 )
 
 set(SRC_FILES
@@ -74,28 +51,6 @@ set(SRC_FILES
     src/point_cloud_common.cpp
     src/point_cloud.cpp
     src/conversion_utilities.cpp
-
-    #Draco
-    lib/draco/src/draco/point_cloud/point_cloud.cc
-    lib/draco/src/draco/core/decoder_buffer.cc
-    lib/draco/src/draco/core/data_buffer.cc
-    lib/draco/src/draco/core/options.cc
-    lib/draco/src/draco/core/draco_types.cc
-    lib/draco/src/draco/core/quantization_utils.cc
-    lib/draco/src/draco/attributes/attribute_quantization_transform.cc
-    lib/draco/src/draco/attributes/geometry_attribute.cc
-    lib/draco/src/draco/attributes/point_attribute.cc
-    lib/draco/src/draco/attributes/attribute_transform.cc
-    lib/draco/src/draco/compression/decode.cc
-    lib/draco/src/draco/compression/attributes/kd_tree_attributes_decoder.cc
-    lib/draco/src/draco/compression/attributes/attributes_decoder.cc
-    lib/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_decoder.cc
-    lib/draco/src/draco/compression/point_cloud/point_cloud_decoder.cc
-    lib/draco/src/draco/compression/point_cloud/point_cloud_sequential_decoder.cc
-    lib/draco/src/draco/compression/bit_coders/rans_bit_decoder.cc
-    lib/draco/src/draco/compression/bit_coders/direct_bit_decoder.cc
-    lib/draco/src/draco/metadata/metadata.cc
-    lib/draco/src/draco/metadata/metadata_decoder.cc
 )
 
 add_library(${PROJECT_NAME} ${SRC_FILES} ${HEADER_FILES})
